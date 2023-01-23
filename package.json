@@ -1,6 +1,6 @@
 {
   "name": "trybe-futebol-club",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Ao iniciar este projeto, você concorda com as diretrizes do Código de Ética e Conduta e do Manual da Pessoa Estudante da Trybe.",
   "main": "index.js",
   "scripts": {

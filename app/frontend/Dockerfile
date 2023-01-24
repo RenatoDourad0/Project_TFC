@@ -1,4 +1,4 @@
-FROM arm64v8/node:16.14-alpine
+FROM node:16.14-alpine
 WORKDIR /app-frontend
 COPY package.json .
 COPY package-lock.json .

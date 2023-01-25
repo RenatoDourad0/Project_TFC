@@ -7,7 +7,7 @@ const secret = process.env.JWT_SECRET || 'seusecretdetoken';
 type jwtReturn = (JwtPayload & { data: { id: number } });
 
 async function validate(token: string): Promise<(User | Error)> {
-  if (!token) {
+  if (!token || token.length === 0) {
     throw new Error('Token not found');
   }
 

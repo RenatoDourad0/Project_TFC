@@ -16,7 +16,7 @@ teamRouter.get(
 );
 
 teamRouter.get(
-  '/teams/:id',
+  '/:id',
   (req, res, next) => controller.getById(req, res, next),
 );
 

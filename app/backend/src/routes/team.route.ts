@@ -1,23 +1,18 @@
-import { NextFunction, Request, Response, Router } from 'express';
+import { Router } from 'express';
 import { Authentication } from '../middlewares';
 import Team from '../database/models/Team.model';
-import TeamService from '../services/team.service';
+import { TeamService } from '../services';
+import { TeamController } from '../controllers';
 
 const teamRouter = Router();
 const auth = new Authentication();
-const teamService = new TeamService(Team);
+const service = new TeamService(Team);
+const controller = new TeamController(service);
 
 teamRouter.get(
   '/',
   (req, res, next) => auth.validate(req, res, next),
-  async (_req: Request, res: Response, next: NextFunction) => {
-    try {
-      const teams = await teamService.getAll();
-      return res.status(200).json(teams);
-    } catch (error) {
-      next(error);
-    }
-  },
+  (req, res, next) => controller.getAll(req, res, next),
 );
 
 export default teamRouter;

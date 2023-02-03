@@ -1,9 +1,10 @@
 import { Router } from 'express';
-import validateRole from '../controllers/login.controller';
+import { LoginController } from '../controllers';
 import { Authentication } from '../middlewares';
 
 const loginRouter = Router();
 const Auth = new Authentication();
+const controller = new LoginController();
 
 loginRouter.get('/', (_req, res) => res.status(200).json('ok!'));
 
@@ -15,7 +16,7 @@ loginRouter.post(
 loginRouter.get(
   '/validate',
   (req, res, next) => Auth.validate(req, res, next),
-  (req, res) => validateRole(req, res),
+  (req, res) => controller.getRole(req, res),
 );
 
 export default loginRouter;

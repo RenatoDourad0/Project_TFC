@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 // import Team from '../database/models/Team.model';
-import { TeamService } from '../services';
+import TeamService from '../services';
 // import { Icontroller } from '../interfaces';
 
 export default class TeamController {
@@ -15,7 +15,16 @@ export default class TeamController {
     }
   }
 
-  // getById(id: number): T;
+  async getById(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { id } = req.params;
+      const team = await this.service.getById(Number(id));
+      return res.status(200).json(team);
+    } catch (error) {
+      next(error);
+    }
+  }
+
   // create(): T;
   // update(): T;
   // delete(): void;

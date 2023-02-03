@@ -1,10 +1,11 @@
 import { NextFunction, Request, Response } from 'express';
+import { ITeamService } from '../interfaces';
 // import Team from '../database/models/Team.model';
-import TeamService from '../services';
+import { TeamService } from '../services';
 // import { Icontroller } from '../interfaces';
 
 export default class TeamController {
-  constructor(private service = new TeamService()) {}
+  constructor(private service: ITeamService = new TeamService()) {}
 
   async getAll(req: Request, res: Response, next: NextFunction) {
     try {

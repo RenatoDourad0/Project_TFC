@@ -7,7 +7,7 @@ class Match extends Model {
   declare homeTeamId: number;
   declare homeTeamGoals: number;
   declare awayTeamId: number;
-  declare awayTeamsGoals: number;
+  declare awayTeamGoals: number;
   declare inProgress: boolean;
 }
 
@@ -37,7 +37,7 @@ Match.init({
     allowNull: false,
     type: INTEGER,
   },
-  awayTeamsGoals: {
+  awayTeamGoals: {
     field: 'away_team_goals',
     allowNull: false,
     type: INTEGER,
@@ -58,8 +58,8 @@ Match.init({
   timestamps: false,
 });
 
-Match.belongsTo(Team, { foreignKey: 'homeTeamId', as: 'id' });
-Match.belongsTo(Team, { foreignKey: 'awayTeamId', as: 'id' });
+Match.belongsTo(Team, { foreignKey: 'homeTeamId', as: 'homeTeam' });
+Match.belongsTo(Team, { foreignKey: 'awayTeamId', as: 'awayTeam' });
 
 Team.hasMany(Match, { foreignKey: 'id', as: 'homeTeamId' });
 Team.hasMany(Match, { foreignKey: 'id', as: 'awayTeamId' });

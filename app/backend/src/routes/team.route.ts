@@ -1,7 +1,7 @@
 import { Router } from 'express';
 // import { Authentication } from '../middlewares';
 import Team from '../database/models/Team.model';
-import TeamService from '../services';
+import { TeamService } from '../services';
 import { TeamController } from '../controllers';
 
 const teamRouter = Router();
@@ -11,7 +11,6 @@ const controller = new TeamController(service);
 
 teamRouter.get(
   '/',
-  // (req, res, next) => auth.validate(req, res, next),
   (req, res, next) => controller.getAll(req, res, next),
 );
 

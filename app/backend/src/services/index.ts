@@ -1,3 +1,7 @@
 import TeamService from './team.service';
+import MatchService from './match.service';
 
-export default TeamService;
+export {
+  TeamService,
+  MatchService,
+};

@@ -1,7 +1,9 @@
 import IAuthentication from './IAuthentication';
-import Icontroller from './IController';
+import ITeamService from './ITeamService';
+import IMatchService from './IMatchService';
 
 export {
   IAuthentication,
-  Icontroller,
+  ITeamService,
+  IMatchService,
 };

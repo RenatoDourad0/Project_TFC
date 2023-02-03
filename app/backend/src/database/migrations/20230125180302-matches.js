@@ -36,7 +36,7 @@ module.exports = {
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
       },
-      awayTeamsGoals: {
+      awayTeamGoals: {
         field: 'away_team_goals',
         allowNull: false,
         type: Sequelize.INTEGER,

@@ -1,6 +1,6 @@
 import * as express from 'express';
 import { errorMiddleware } from './middlewares';
-import { loginRouter } from './routes';
+import { loginRouter, teamRouter } from './routes';
 
 class App {
   public app: express.Express;
@@ -21,11 +21,13 @@ class App {
       res.header('Access-Control-Allow-Headers', '*');
       next();
     };
+    this.app.disable('x-powered-by');
 
     this.app.use(express.json());
     this.app.use(accessControl);
 
     this.app.use('/login', loginRouter);
+    this.app.use('/teams', teamRouter);
 
     this.app.use(errorMiddleware);
   }

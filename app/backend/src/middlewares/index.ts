@@ -1,9 +1,7 @@
-import authenticate from './authenticate.middleware';
-import validate from './validate.middleware';
+import Authentication from './authenticate.middleware';
 import errorMiddleware from './error.middleware';
 
 export {
-  authenticate,
-  validate,
+  Authentication,
   errorMiddleware,
 };

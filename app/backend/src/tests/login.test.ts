@@ -12,28 +12,36 @@ chai.use(chaiHttp);
 
 const { expect } = chai;
 
+const user = {
+  dataValues: {
+    id: 1,
+    username: 'Admin',
+    role: 'admin',
+    email: 'admin@admin.com',
+    password: '$2a$08$xi.Hxk1czAO0nZR..B393u10aED0RQ1N3PAEXQ7HxtLjKPEZBu.PW'
+  }
+};
+
 describe('Teste da rota /login', () => {
   let chaiHttpResponse: Response;
 
-  beforeEach(async () => {
-    sinon
-      .stub(User, "findOne")
-      .onFirstCall().resolves({
-        id: 1,
-        username: 'Admin',
-        role: 'admin',
-        email: 'admin@admin.com',
-        password: '$2a$08$xi.Hxk1czAO0nZR..B393u10aED0RQ1N3PAEXQ7HxtLjKPEZBu.PW'
-      } as User)
-      .onCall(2).resolves(undefined)
-      .onCall(3).resolves(undefined)
-  });
+  // beforeEach(async () => {
+  //   sinon
+  //     .stub(User, "findOne")
+  //     .onFirstCall().resolves(user as User)
+  //     .onCall(2).resolves(undefined)
+  //     .onCall(3).resolves(undefined)
+  // });
 
   afterEach(()=>{
     (User.findOne as sinon.SinonStub).restore();
   })
 
   it('se retorna um token para um acesso válido', async () => {
+    sinon
+    .stub(User, "findOne")
+    .onFirstCall().resolves(user as User)
+
     chaiHttpResponse = await chai
         .request(app)
         .post('/login')
@@ -48,6 +56,10 @@ describe('Teste da rota /login', () => {
   });
 
   it('se retorna mensagem de erro para um acesso sem email/senha', async () => {
+    sinon
+    .stub(User, "findOne")
+    .onFirstCall().resolves(undefined)
+
     chaiHttpResponse = await chai
         .request(app)
         .post('/login')
@@ -62,6 +74,10 @@ describe('Teste da rota /login', () => {
   });
 
   it('se retorna mensagem de erro para um acesso com usuário não encontrado', async () => {
+    sinon
+    .stub(User, "findOne")
+    .onFirstCall().resolves(undefined)
+
     chaiHttpResponse = await chai
         .request(app)
         .post('/login')
@@ -69,39 +85,49 @@ describe('Teste da rota /login', () => {
           'email': 'test@fake.com',
           'password': 'secret_admin'
         })
-        
+    
     expect(chaiHttpResponse.status).to.be.equal(401);
     expect(chaiHttpResponse.body).not.to.have.property('token');
     expect(chaiHttpResponse.body.message).to.be.equal('Incorrect email or password')
   });
 });
 
-describe('Teste da rota /Login/validate', () => {
+describe('Teste da rota /Login/validate',() => {
   let chaiHttpResponse: Response;
+  let token: string;
 
   beforeEach(async () => {
-    sinon
-      .stub(User, "findByPk")
-      .onFirstCall().resolves({
-        id: 1,
-        username: 'Admin',
-        role: 'admin',
+    const tokenReturn = await chai
+      .request(app)
+      .post('/login')
+      .send({
         email: 'admin@admin.com',
-        password: '$2a$08$xi.Hxk1czAO0nZR..B393u10aED0RQ1N3PAEXQ7HxtLjKPEZBu.PW'
-      } as User)
-      .onSecondCall().resolves(null)
-      .onThirdCall().resolves(null)
-  });
+        password: 'secret_admin'
+      });
+    token = tokenReturn.body.token;
+  })
+
+  // beforeEach(async () => {
+  //   sinon
+  //     .stub(User, "findByPk")
+  //     .onFirstCall().resolves(user as User)
+  //     .onSecondCall().resolves(null)
+  //     .onThirdCall().resolves(null);
+  // });
 
   afterEach(()=>{
     (User.findByPk as sinon.SinonStub).restore();
   })
 
   it('se retorna um role para uma solicitação válida', async () => {
+    sinon
+    .stub(User, "findByPk")
+    .onFirstCall().resolves(user as User)
+
     chaiHttpResponse = await chai
         .request(app)
         .get('/login/validate')
-        .set('Authorization', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NzQ1ODc5OTgsImV4cCI6MTY3NTE5Mjc5OH0.D2vSUsMKGJMVAHi2-d2gsLHEm8NFmZq8K2uUhJq1KV4')
+        .set('Authorization', token)
 
     expect(chaiHttpResponse.status).to.be.equals(200);
     expect(chaiHttpResponse.body).to.have.property('role');
@@ -109,10 +135,14 @@ describe('Teste da rota /Login/validate', () => {
   });
 
   it('se retorna mensagem de erro para uma solicitação com token inválido', async () => {
+    sinon
+    .stub(User, "findByPk")
+    .onFirstCall().resolves(null)
+
     chaiHttpResponse = await chai
         .request(app)
         .get('/login/validate')
-        .set('Authorization', 'eyJhbGciOtJIUzI1NiIsInR5cCI6IkpXMCJ9.eyJpYXQiOjE2MzQ1ODc5OTgsImV4cCI7MTY3NTE5Mjc5OH0.D2vSUsMKGJMVAHi2-d2gsLHEm8NFmZq8K2uUhJq1KV5')
+        .set('Authorization', token.replace('a', 'b'))
     
     expect(chaiHttpResponse.status).to.be.equal(401);
     expect(chaiHttpResponse.body).not.to.have.property('role');
@@ -120,6 +150,10 @@ describe('Teste da rota /Login/validate', () => {
   });
 
   it('se retorna mensagem de erro para uma solicitação sem token', async () => {
+    sinon
+    .stub(User, "findByPk")
+    .onFirstCall().resolves(null)
+
     chaiHttpResponse = await chai
         .request(app)
         .get('/login/validate');

@@ -1,8 +1,9 @@
 import { Router } from 'express';
-import { validate } from '../middlewares/index';
+import { Authentication } from '../middlewares';
 
+const Auth = new Authentication();
 const userRouter = Router();
 
-userRouter.get('/', validate);
+userRouter.get('/', (req, res, next) => Auth.validate(req, res, next));
 
 export default userRouter;

@@ -142,7 +142,7 @@ describe('Teste da rota /Login/validate',() => {
     chaiHttpResponse = await chai
         .request(app)
         .get('/login/validate')
-        .set('Authorization', token.replace('a', 'b'))
+        .set('Authorization', 'eyJhbGciOiJIUzI1NiIsInR5HCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJBZG1pbiIsInJvCGUiOiJhZG1pbiIsImRiTWFpbCI6ImFkbWluQGFkbWluLmNvbSIsImlhdCI6MTY3NTM2OTczNCwiZXhwIjoxNjc1OTc0NTM0fQ.ecR4h43KCkAQpfemEgnOIHavMf2ZCyvuCKph0MctcUI')
     
     expect(chaiHttpResponse.status).to.be.equal(401);
     expect(chaiHttpResponse.body).not.to.have.property('role');

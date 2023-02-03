@@ -7,6 +7,8 @@ import User from '../database/models/User.model';
 
 type jwtReturn = (JwtPayload & { id: number });
 
+const UnouthorizedErrorMessage = 'Incorrect email or password';
+
 export default class JwtAuth implements IAuthentication {
   private isBodyValid = (email: string, password: string) => email && password;
 
@@ -18,7 +20,7 @@ export default class JwtAuth implements IAuthentication {
     }
     const user = await User.findOne({ where: { email } });
     if (!user || !bcrypt.compareSync(password, user.dataValues.password)) {
-      throw new UnauthorizedError('Incorrect email or password');
+      throw new UnauthorizedError(UnouthorizedErrorMessage);
     }
     const { id, username, role, email: dbMail } = user.dataValues;
     const jwtConfig:SignOptions = { expiresIn: '7d', algorithm: 'HS256' };
@@ -30,10 +32,15 @@ export default class JwtAuth implements IAuthentication {
     if (token.length === 0) {
       throw new BadRequestError('All fields must be filled');
     }
-    const decoded = verify(token, this.secret) as jwtReturn;
+    let decoded;
+    try {
+      decoded = verify(token, this.secret) as jwtReturn;
+    } catch (error) {
+      throw new UnauthorizedError(UnouthorizedErrorMessage);
+    }
     const user = await User.findByPk(decoded.id) as User;
     if (!user || user.dataValues.email !== decoded.dbMail) {
-      throw new UnauthorizedError('Incorrect email or password');
+      throw new UnauthorizedError(UnouthorizedErrorMessage);
     }
     return user.dataValues;
   }

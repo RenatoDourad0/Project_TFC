@@ -64,6 +64,6 @@ export default class MatchService implements IMatchService {
         awayTeamGoals: newData.awayTeamGoals },
       { where: { id } },
     );
-    return affectedRows === (1 || 2);
+    return affectedRows === 1 || affectedRows === 2;
   }
 }

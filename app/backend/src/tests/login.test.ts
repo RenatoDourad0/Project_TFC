@@ -120,6 +120,15 @@ describe('Teste da rota /Login/validate',() => {
   })
 
   it('se retorna um role para uma solicitação válida', async () => {
+    const validTokenReturn = await chai
+    .request(app)
+    .post('/login')
+    .send({
+      email: 'admin@admin.com',
+      password: 'secret_admin'
+    });
+    const validToken = validTokenReturn.body.token;
+    
     sinon
     .stub(User, "findByPk")
     .onFirstCall().resolves(user as User)
@@ -127,7 +136,7 @@ describe('Teste da rota /Login/validate',() => {
     chaiHttpResponse = await chai
         .request(app)
         .get('/login/validate')
-        .set('Authorization', token)
+        .set('Authorization', validToken)
 
     expect(chaiHttpResponse.status).to.be.equals(200);
     expect(chaiHttpResponse.body).to.have.property('role');

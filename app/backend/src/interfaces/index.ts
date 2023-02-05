@@ -1,8 +1,9 @@
 import IAuthentication from './IAuthentication';
-import ITeamService from './ITeamService';
-import IMatchService from './IMatchService';
-import ILeaderBoardService from './IleaderBoardService';
-import ILeaderBoardModel, { ILeaderBoard } from './IleaderBoardModel';
+import ITeamService from './teams/ITeamService';
+import IMatchService from './matches/IMatchService';
+import ILeaderBoardService from './leaderBoard/IleaderBoardService';
+import ILeaderBoardModel, { ILeaderBoard, IGame, Iteam } from './leaderBoard/IleaderBoardModel';
+import { IHomeTeam, IAwayTeam, Igame } from './teams/ITeam';
 
 export {
   IAuthentication,
@@ -11,4 +12,9 @@ export {
   ILeaderBoardService,
   ILeaderBoardModel,
   ILeaderBoard,
+  IGame,
+  Iteam,
+  IHomeTeam,
+  IAwayTeam,
+  Igame,
 };

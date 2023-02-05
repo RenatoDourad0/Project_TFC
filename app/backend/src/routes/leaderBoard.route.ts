@@ -15,4 +15,9 @@ leaderBoardRouter.get(
   (req, res, next) => controller.getClassifications(req, res, next),
 );
 
+leaderBoardRouter.get(
+  '/away',
+  (req, res, next) => controller.getClassifications(req, res, next),
+);
+
 export default leaderBoardRouter;

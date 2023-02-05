@@ -1,5 +1,5 @@
 import { ILeaderBoard } from './IleaderBoardModel';
 
 export default interface ILeaderBoardService {
-  getClassifications(): Promise<ILeaderBoard[]>
+  getClassifications(type: string): Promise<ILeaderBoard[]>
 }

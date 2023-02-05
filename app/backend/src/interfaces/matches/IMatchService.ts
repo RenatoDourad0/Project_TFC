@@ -1,5 +1,5 @@
 import { ModelAttributes } from 'sequelize';
-import Match from '../database/models/Match.model';
+import Match from '../../database/models/Match.model';
 
 export default interface IMatchService {
   getAll(): Promise<Match[]>;

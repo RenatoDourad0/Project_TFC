@@ -11,6 +11,11 @@ const service = new LeaderBoardService(model);
 const controller = new LeaderBoardController(service);
 
 leaderBoardRouter.get(
+  '/',
+  (req, res, next) => controller.getGenericClassifications(req, res, next),
+);
+
+leaderBoardRouter.get(
   '/home',
   (req, res, next) => controller.getClassifications(req, res, next),
 );

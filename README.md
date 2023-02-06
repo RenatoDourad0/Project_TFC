@@ -4,10 +4,10 @@
   <h1 align="center">TFC</h1>
 
   <p align="center">
-    This project is a full-stack application developed 
+    This project is a full-stack/CRUD application developed with react, express, sequelize, mysql, jwt. Tested with jest.
     <br />
     <br />
-    <a href="https://renatodourad0.github.io/Project_Irecipe/" target='_blank'>View Demo</a>
+    <!-- <a href="https://renatodourad0.github.io/Project_Irecipe/" target='_blank'>View Demo</a> -->
   </p>
 </div>
 
@@ -47,12 +47,13 @@
 
 ### Built With
 
-* [![React][React.js]][React-url] ![Hooks](https://img.shields.io/badge/Hooks-000000?style=for-the-badge&logo=&logoColor=purple) ![Context API](https://img.shields.io/badge/ContextAPI-000000?style=for-the-badge&logo=&logoColor=white)
-* ![React-router](https://img.shields.io/badge/reactrouter-000000?style=for-the-badge&logo=reactrouter&logoColor=white)
-* ![RTL](https://img.shields.io/badge/rtl-000000?style=for-the-badge&logo=rtl&logoColor=red)
-* ![Jest](https://img.shields.io/badge/jest-000000?style=for-the-badge&logo=jest&logoColor=white)
-* ![CSS3](https://img.shields.io/badge/css3-000000?style=for-the-badge&logo=css3&logoColor=blue)
-* ![Bootstrap](https://img.shields.io/badge/Bootstrap-000000?style=for-the-badge&logo=bootstrap&logoColor=white)
+* ![React.js](https://img.shields.io/badge/React-000000?style=for-the-badge&logo=react&logoColor=61DAFB)
+* ![TypeScript](https://img.shields.io/badge/typescript-000000?style=for-the-badge&logo=typescript&logoColor=purple)
+* ![Express](https://img.shields.io/badge/express-000000?style=for-the-badge&logo=reactrouter&logoColor=white)
+* ![Sequelize](https://img.shields.io/badge/sequelize-000000?style=for-the-badge&logo=rtl&logoColor=red)
+* ![Mysql](https://img.shields.io/badge/mysql-000000?style=for-the-badge&logo=rtl&logoColor=red)
+* ![Docker](https://img.shields.io/badge/docker-000000?style=for-the-badge&logo=jest&logoColor=white)
+* ![Jest](https://img.shields.io/badge/jest-000000?style=for-the-badge&logo=css3&logoColor=blue)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -62,16 +63,8 @@
 ## Usage
 
 <!-- Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources. -->
-These project was conceived for a viewport of 365px x 660px.
-
-Users are able to
-  * view recommended meals and drinks recipes
-  * search for recipes by name, ingredient or first letter
-  * switch between categories
-  * favorite and share recipes, saving to local storage
-  * start an recipe and check the used ingredients, also saving to local storage
-  * see their favorites and finished recipes
-
+This application consists of a championship tracker where users can see the ranking table sorted from the home teams, the visiting teams or the general classification.
+users are also able to add new games to the database.
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
@@ -91,24 +84,21 @@ To get a local copy up and running check below and follow these simple steps if 
   ```sh
   npm install npm@latest -g
   ```
-
+* [install docker](https://docs.docker.com/engine/install/)
 ### Installation
 
 1. Fork the repo
 2. Clone the repo
    ```sh
-   git clone git@github.com:< USERNAME >/Project_Irecipe.git
+   git clone git@github.com:< USERNAME >/Project_TFC
    ```
-3. Install NPM packages
+4. Start docker development environment
+  - In the root folder:
    ```sh
-   npm install
+   npm run compose:up:dev
    ```
-4. Start the server
-   ```sh
-   npm start
-   ```
-5. To log into the application use a random email and a password longer than 6 characters
-   
+5. Back-end will be running on port 3001, DB on port 3006 and front on 3000
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
@@ -118,7 +108,7 @@ To get a local copy up and running check below and follow these simple steps if 
 
 Renato Dourado - [Linkedin](https://linkedin.com/in/renato-dourado-b1b301112) - renatocvdourado@hotmail.com
 
-Project Link: [https://github.com/RenatoDourad0/Project_Irecipe](https://github.com/RenatoDourad0/Project_Irecipe)
+Project Link: [https://github.com/RenatoDourad0/Project_Irecipe](https://github.com/RenatoDourad0/Project_TFC)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -127,16 +117,12 @@ Project Link: [https://github.com/RenatoDourad0/Project_Irecipe](https://github.
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
 
-A special thanks to all my team members who embraced this project and made possible a fast and enjoyable development.
-- Fernando Oliveira, Lucas Rodrigues, Arthur Barbosa, Júlio Venancio,  Matheus Bora
-
 Contributors besides the team were responsible for evaluation files that have been removed after approval.
-
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
-<!-- 
+<!--
 link para logos das tecnologias
 - https://github.com/simple-icons/simple-icons/blob/develop/slugs.md
 - buscar pelo nome do logo e substituir no url do badge (https://img.shields.io/badge/<NOME-DO-LOGO>-000000?style=for-the-badge&logo=<NOME-DO-LOGO>&logoColor=white)
@@ -164,4 +150,4 @@ link para logos das tecnologias
 [Bootstrap.com]: https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white
 [Bootstrap-url]: https://getbootstrap.com
 [JQuery.com]: https://img.shields.io/badge/jQuery-0769AD?style=for-the-badge&logo=jquery&logoColor=white
-[JQuery-url]: https://jquery.com 
+[JQuery-url]: https://jquery.com

@@ -32,7 +32,6 @@ services:
       - APP_PORT=3001
       - JWT_SECRET=jwt_secret
       # Os dados abaixo se referem ao container `db`
-      # Dica: Relembre aqui da comunicação interna entre containers
       - DB_USER=root
       - DB_PASS=123456
       - DB_HOST=db

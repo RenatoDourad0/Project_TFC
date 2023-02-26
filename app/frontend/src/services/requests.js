@@ -4,7 +4,7 @@ const api = axios.create({
   baseURL: `https://projecttfcback-production.up.railway.app`,
   headers: {
     'Content-Type': 'application/json;charset=utf-8',
-    'Access-Control-Allow-Origin': 'https://projecttfcback-production.up.railway.app',
+    'Access-Control-Allow-Origin': 'https://projecttfcfront-production.up.railway.app',
   },
 });
 

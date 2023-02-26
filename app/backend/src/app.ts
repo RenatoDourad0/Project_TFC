@@ -1,4 +1,7 @@
 import * as express from 'express';
+import helmet from 'helmet';
+import rateLimit from 'express-rate-limit';
+import cors from 'cors';
 import { errorMiddleware } from './middlewares';
 import { loginRouter, teamRouter, matchRouter, leaderBoardRouter } from './routes';
 
@@ -6,7 +9,7 @@ class App {
   public app: express.Express;
 
   constructor() {
-    this.app = express();
+    this.app = express.default();
 
     this.config();
 
@@ -15,16 +18,21 @@ class App {
   }
 
   private config():void {
-    const accessControl: express.RequestHandler = (_req, res, next) => {
-      res.header('Access-Control-Allow-Origin', 'https://projecttfcfront-production.up.railway.app');
-      res.header('Access-Control-Allow-Methods', 'GET,POST,DELETE,OPTIONS,PUT,PATCH');
-      res.header('Access-Control-Allow-Headers', '*');
-      next();
-    };
-    this.app.disable('x-powered-by');
+    this.app.use(cors({
+      origin: 'https://projecttfcfront-production.up.railway.app',
+      optionsSuccessStatus: 200
+    }));
+
+    this.app.use(rateLimit({
+      windowMs: 15 * 60 * 1000, // 15 minutes
+      max: 100, // Limit each IP to 100 requests per `window` (here, per 15 minutes)
+      standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
+      legacyHeaders: false, // Disable the `X-RateLimit-*` headers
+    }))
+
+    this.app.use(helmet());
 
     this.app.use(express.json());
-    this.app.use(accessControl);
 
     this.app.use('/login', loginRouter);
     this.app.use('/teams', teamRouter);

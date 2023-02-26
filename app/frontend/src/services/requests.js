@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: `projecttfcback-production.up.railway.app`,
+  baseURL: `https://projecttfcback-production.up.railway.app`,
 });
 
 export const setToken = (token) => {

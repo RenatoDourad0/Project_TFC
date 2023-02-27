@@ -26,9 +26,8 @@ class App {
       res.header('Access-Control-Allow-Headers', '*');
       next();
     };
-
-    this.app.use(accessControl);
-    this.app.options('*', accessControl);
+    this.app.use((req, res, next) => accessControl(req, res, next));
+    this.app.options('*', (req, res, next) => accessControl(req, res, next));
 
     this.app.use(rateLimit({
       windowMs: 15 * 60 * 1000, // 15 minutes
@@ -45,6 +44,11 @@ class App {
     this.app.use('/teams', teamRouter);
     this.app.use('/matches', matchRouter);
     this.app.use('/leaderboard', leaderBoardRouter);
+
+    this.app.use((req, res, next) => {
+      console.log(req, res);
+      next();
+    });
 
     this.app.use(errorMiddleware);
   }

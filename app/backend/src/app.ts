@@ -1,5 +1,4 @@
 import * as express from 'express';
-import cors from 'cors';
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
 import { errorMiddleware } from './middlewares';
@@ -26,7 +25,13 @@ class App {
     }))
 
     this.app.use(helmet());
-    this.app.use(cors());
+    const accessControl: express.RequestHandler = (_req, res, next) => {
+      res.header('Access-Control-Allow-Origin', '*');
+      res.header('Access-Control-Allow-Methods', 'GET,POST,DELETE,OPTIONS,PUT,PATCH');
+      res.header('Access-Control-Allow-Headers', '*');
+      next();
+    };
+    this.app.use(accessControl);
 
     this.app.use(express.json());
 

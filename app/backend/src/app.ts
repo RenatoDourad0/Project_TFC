@@ -1,4 +1,5 @@
 import * as express from 'express';
+import cors from 'cors';
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
 import { errorMiddleware } from './middlewares';
@@ -25,6 +26,7 @@ class App {
     }))
 
     this.app.use(helmet());
+    this.app.use(cors());
 
     this.app.use(express.json());
 

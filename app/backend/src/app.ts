@@ -19,7 +19,7 @@ class App {
 
   private config():void {
     this.app.use(morgan('dev'));
-    
+
     const accessControl: express.RequestHandler = (_req, res, next) => {
       res.header('Access-Control-Allow-Origin', '*');
       res.header('Access-Control-Allow-Methods', 'GET,POST,DELETE,OPTIONS,PUT,PATCH');
@@ -30,14 +30,14 @@ class App {
     this.app.use(accessControl);
     // this.app.options('*', accessControl);
 
-    this.app.use(rateLimit({
-      windowMs: 15 * 60 * 1000, // 15 minutes
-      max: 100, // Limit each IP to 100 requests per `window` (here, per 15 minutes)
-      standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
-      legacyHeaders: false, // Disable the `X-RateLimit-*` headers
-    }))
+    // this.app.use(rateLimit({
+    //   windowMs: 15 * 60 * 1000, // 15 minutes
+    //   max: 100, // Limit each IP to 100 requests per `window` (here, per 15 minutes)
+    //   standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
+    //   legacyHeaders: false, // Disable the `X-RateLimit-*` headers
+    // }))
 
-    this.app.use(helmet());
+    // this.app.use(helmet());
 
     this.app.use(express.json());
 

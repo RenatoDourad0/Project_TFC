@@ -7,7 +7,7 @@
     This project is a full-stack/CRUD application developed with react, express, sequelize, mysql, jwt. Tested with jest.
     <br />
     <br />
-    <!-- <a href="https://renatodourad0.github.io/Project_Irecipe/" target='_blank'>View Demo</a> -->
+    <a href="https://projecttfcfront-production.up.railway.app/" target='_blank'>View Demo</a>
   </p>
 </div>
 

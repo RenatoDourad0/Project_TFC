@@ -31,9 +31,11 @@ class App {
       res.header('Access-Control-Allow-Headers', '*');
       next();
     };
-    this.app.use(accessControl);
 
     this.app.use(express.json());
+
+    this.app.use(accessControl);
+    this.app.options('*', accessControl);
 
     this.app.use('/login', loginRouter);
     this.app.use('/teams', teamRouter);

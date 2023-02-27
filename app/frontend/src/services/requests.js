@@ -2,12 +2,6 @@ import axios from 'axios';
 
 const api = axios.create({
   baseURL: `https://projecttfcback-production.up.railway.app`,
-  headers: {
-    'Content-Type': 'application/json;charset=utf-8',
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Methods': '*',
-    'Access-Control-Allow-Headers': '*',
-  },
 });
 
 export const setToken = (token) => {

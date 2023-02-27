@@ -18,12 +18,7 @@ class App {
   }
 
   private config():void {
-    this.app.use(cors({
-      origin: '*',
-      methods: ['GET', 'PUT', 'PATCH', 'POST', 'DELETE'],
-      allowedHeaders: ['Content-Type', 'Authorization' ],
-      optionsSuccessStatus: 200,
-    }));
+    this.app.use(cors());
 
     this.app.use(rateLimit({
       windowMs: 15 * 60 * 1000, // 15 minutes

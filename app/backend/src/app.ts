@@ -19,9 +19,10 @@ class App {
 
   private config():void {
     this.app.use(cors({
-      origin: 'https://projecttfcfront-production.up.railway.app',
+      origin: ['https://projecttfcfront-production.up.railway.app'],
+      methods: ['GET', 'PUT', 'PATCH', 'POST', 'DELETE'],
+      allowedHeaders: ['Content-Type', 'Authorization' ],
       optionsSuccessStatus: 200,
-      allowedHeaders:'Content-Type,Authorization'
     }));
 
     this.app.use(rateLimit({

@@ -1,5 +1,6 @@
 import * as express from 'express';
 import helmet from 'helmet';
+import morgan from 'morgan';
 import rateLimit from 'express-rate-limit';
 import { errorMiddleware } from './middlewares';
 import { loginRouter, teamRouter, matchRouter, leaderBoardRouter } from './routes';
@@ -17,6 +18,8 @@ class App {
   }
 
   private config():void {
+    this.app.use(morgan('dev'));
+    
     const accessControl: express.RequestHandler = (_req, res, next) => {
       res.header('Access-Control-Allow-Origin', '*');
       res.header('Access-Control-Allow-Methods', 'GET,POST,DELETE,OPTIONS,PUT,PATCH');

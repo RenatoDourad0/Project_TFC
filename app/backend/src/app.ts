@@ -1,4 +1,4 @@
-import * as express from 'express';
+import express, { Express } from 'express';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import rateLimit from 'express-rate-limit';
@@ -6,10 +6,10 @@ import { errorMiddleware } from './middlewares';
 import { loginRouter, teamRouter, matchRouter, leaderBoardRouter } from './routes';
 
 class App {
-  public app: express.Express;
+  public app: Express;
 
   constructor() {
-    this.app = express.default();
+    this.app = express();
 
     this.config();
 
@@ -20,14 +20,16 @@ class App {
   private config():void {
     this.app.use(morgan('dev'));
 
+    this.app.use(express.json());
+
     const accessControl: express.RequestHandler = (_req, res, next) => {
       res.header('Access-Control-Allow-Origin', '*');
       res.header('Access-Control-Allow-Methods', 'GET,POST,DELETE,OPTIONS,PUT,PATCH');
       res.header('Access-Control-Allow-Headers', '*');
       next();
     };
-    this.app.use((req, res, next) => accessControl(req, res, next));
     this.app.options('*', (req, res, next) => accessControl(req, res, next));
+    this.app.use(accessControl);
 
     this.app.use(rateLimit({
       windowMs: 15 * 60 * 1000, // 15 minutes
@@ -37,8 +39,6 @@ class App {
     }))
 
     this.app.use(helmet());
-
-    this.app.use(express.json());
 
     this.app.use('/login', loginRouter);
     this.app.use('/teams', teamRouter);

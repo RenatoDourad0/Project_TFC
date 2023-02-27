@@ -25,7 +25,7 @@ class App {
     }))
 
     this.app.use(helmet());
-    
+
     const accessControl: express.RequestHandler = (_req, res, next) => {
       res.header('Access-Control-Allow-Origin', '*');
       res.header('Access-Control-Allow-Methods', 'GET,POST,DELETE,OPTIONS,PUT,PATCH');
@@ -36,7 +36,7 @@ class App {
     this.app.use(express.json());
 
     this.app.use(accessControl);
-    this.app.options('*', accessControl);
+    // this.app.options('*', accessControl);
 
     this.app.use('/login', loginRouter);
     this.app.use('/teams', teamRouter);

@@ -34,8 +34,8 @@ class App {
 
     this.app.use(express.json());
 
-    this.app.use((req, res, next) => accessControl(req, res, next));
-    this.app.options('*', (req, res, next) => accessControl(req, res, next));
+    this.app.use(accessControl);
+    this.app.options('*', accessControl);
 
     this.app.use('/login', loginRouter);
     this.app.use('/teams', teamRouter);

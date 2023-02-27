@@ -1,6 +1,6 @@
 import { App } from './app';
 import 'dotenv/config';
 
-const PORT = process.env.PGPORT || 6367;
+const PORT = process.env.BACKPORT || 3000;
 
 new App().start(PORT);

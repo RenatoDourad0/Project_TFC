@@ -29,29 +29,28 @@ services:
       db:
         condition: service_healthy
     environment:
-      - APP_PORT=3001
+      - APP_PORT=3000
       - JWT_SECRET=jwt_secret
       # Os dados abaixo se referem ao container `db`
-      - DB_USER=root
-      - DB_PASS=123456
-      - DB_HOST=db
-      - DB_PORT=3306
+      - PGDATABASE=railway
+      - PGHOST=containers-us-west-176.railway.app
+      - PGPASSWORD=uUuM13aWPFjDu1BoOjvW
+      - PGPORT=6367
+      - PGUSER=postgres
     healthcheck:
       test: ["CMD", "lsof", "-t", "-i:3001"] # Caso utilize outra porta interna para o back, altere ela aqui também
       timeout: 10s
       retries: 5
   db:
-    image: mysql:8.0.21
+    image: postgres
     container_name: db
     platform: linux/amd64
     ports:
-      - 3002:3306
+      - 8080:8080
     environment:
-      - MYSQL_ROOT_PASSWORD=123456
+      - PGDATABASE=railway
+      - PGHOST=containers-us-west-176.railway.app
+      - PGPASSWORD=uUuM13aWPFjDu1BoOjvW
+      - PGPORT=8080
+      - PGUSER=postgres
     restart: 'always'
-    healthcheck:
-      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"] # Deve aguardar o banco ficar operacional
-      timeout: 10s
-      retries: 5
-    cap_add:
-      - SYS_NICE # Deve omitir alertas menores

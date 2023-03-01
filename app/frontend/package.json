@@ -12,6 +12,7 @@
     "react-dom": "17.0.2",
     "react-router-dom": "6.0.2",
     "react-scripts": "4.0.3",
+    "serve": "^14.2.0",
     "uuid": "8.3.2",
     "web-vitals": "1.1.2"
   },
@@ -19,7 +20,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": " npm run build && PORT=3000 ./node_modules/.bin/serve -s build"
   },
   "eslintConfig": {
     "extends": [

@@ -8,7 +8,7 @@ services:
     working_dir: /app-frontend
     depends_on:
       backend:
-        condition: service_healthy
+#         condition: service_healthy
     # Os `healthcheck` devem garantir que a aplicação
     # está operacional, antes de liberar o container
     healthcheck:
@@ -37,10 +37,10 @@ services:
       - PGPASSWORD=uUuM13aWPFjDu1BoOjvW
       - PGPORT=6367
       - PGUSER=postgres
-    healthcheck:
-      test: ["CMD", "lsof", "-t", "-i:3001"] # Caso utilize outra porta interna para o back, altere ela aqui também
-      timeout: 10s
-      retries: 5
+#     healthcheck:
+#       test: ["CMD", "lsof", "-t", "-i:3001"] # Caso utilize outra porta interna para o back, altere ela aqui também
+#       timeout: 10s
+#       retries: 5
   db:
     image: postgres
     container_name: db
